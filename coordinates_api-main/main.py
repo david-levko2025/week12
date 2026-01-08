@@ -5,7 +5,10 @@ import psycopg2
 from psycopg2.extras import RealDictCursor
 import os
 from contextlib import contextmanager, asynccontextmanager
+from dotenv import load_dotenv
 
+
+load_dotenv()
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Lifespan context manager for startup and shutdown events"""
@@ -22,7 +25,7 @@ DB_CONFIG = {
     "port": os.getenv("POSTGRES_PORT", "5432"),
     "database": os.getenv("POSTGRES_DB", "coordinates_db"),
     "user": os.getenv("POSTGRES_USER", "postgres"),
-    "password": os.getenv("POSTGRES_PASSWORD", "postgres")
+    "password": os.getenv("POSTGRES_PASSWORD", "12345678")
 }
 
 
@@ -162,4 +165,4 @@ async def root():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="127.0.0.1", port=8000)
